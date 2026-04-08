@@ -213,6 +213,14 @@ app.get("/dashboard", requireLogin, (req, res) => {
   });
 });
 
+// Home Page
+app.get("/", (req, res) => {
+  if (req.session?.user) {
+    res.redirect("/dashboard");
+  } else {
+    res.redirect("/login");
+  }
+});
 
 // Tasks List Page
 app.get("/tasks", requireLogin, (req, res) => {
