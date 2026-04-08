@@ -31,7 +31,7 @@ app.use(
     cookieName: 'session', // this is the object name that will be added to 'req'
     secret: process.env.SESSION_SECRET, // this should be a long un-guessable string.
     duration: 20 * 60 * 1000, 
-    activeDuration: 5 * 60 * 1000, // MODIFIED: 延长
+    activeDuration: 5 * 60 * 1000, 
   })
 );
 // make req.session.user available in ALL views, even when no user is logged in
@@ -213,14 +213,6 @@ app.get("/dashboard", requireLogin, (req, res) => {
   });
 });
 
-// Home Page
-app.get("/", (req, res) => {
-  if (req.session?.user) {
-    res.redirect("/dashboard");
-  } else {
-    res.redirect("/login");
-  }
-});
 
 // Tasks List Page
 app.get("/tasks", requireLogin, (req, res) => {
@@ -294,7 +286,7 @@ app.post("/tasks/edit/:id", requireLogin, (req, res) => {
     if (!updated) {
       return res.status(404).send("Task not found");
     }
-    res.redirect("/dashboard");
+    res.redirect("/tasks");
   })
   .catch((err) => {
     console.error("Update error:", err);
@@ -362,18 +354,5 @@ function startAppServer() {
       process.exit(1);
     });
 }
-
-// async function startAppServer() {
-//   try {
-//     await connectMongoDB();
-//     await connectPostgres();
-//     app.listen(port, () => {
-//       console.log(`Server running on http://localhost:${port}`);
-//     });
-//   } catch (err) {
-//     console.error("Failed to initialize:", err);
-//     process.exit(1);
-//   }
-// }
 
 startAppServer();
