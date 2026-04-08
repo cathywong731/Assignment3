@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dracula">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title>Grand Line Registry</title>
+</head>
+<body>
+    <%- include('partials/navbar',  { title: '404' }) %>
+    <div class="flex-1 flex items-center justify-center px-4">
+        <div class="text-center max-w-lg">
+        <div class="text-9xl mb-6">😭</div>
+        <h1 class="text-6xl font-extrabold text-error mb-4">404</h1>
+        <p class="text-xl text-base-content/70 mb-8"><%= message %></p>
+        <a href="/" class="btn btn-primary btn-lg">Return to Homepage</a>
+        </div>
+    </div>
+        
+
+</body>
+</html>

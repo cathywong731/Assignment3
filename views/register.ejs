@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="nord">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title><%= title %></title>
+</head>
+<body class="min-h-screen flex flex-col bg-base-200">
+
+<%- include('partials/header') %>
+ <main class="flex-1 flex items-center justify-center p-4 pt-6 pb-10">
+    <div class="w-full max-w-md bg-base-100 rounded-box shadow-xl p-6">
+      
+      <form method="POST" action="/register" class="space-y-6">
+          <h2 class="card-title text-primary">Register</h2>
+            <% if (error) { %>
+            <div class="alert alert-error mb-4 shadow-sm">
+              <span><%= error %></span>
+            </div>
+          <% } %>
+          <div class="container mx-auto">
+            <div>
+              <input name="username" type="text" placeholder="Username" class="input input-bordered w-full" required="">
+            </div>
+            <br>
+            <div>
+              <input name="email" type="email" placeholder="Email" class="input input-bordered w-full" required="">
+            </div>
+            <br>
+            <div>
+              <input name="password" type="password" placeholder="Password" class="input input-bordered w-full" required="">
+            </div>
+            <br>
+            <div>
+              <input name="confirmPassword" type="password" placeholder="Confirm Password" class="input input-bordered w-full" required=""> 
+            </div>
+            <br><br>
+            <div>
+              <button class="btn btn-primary w-full" type="submit">Register</button>
+            </div>
+          </div>
+          
+          <a href="/login" class="link link-primary">Already have an account?</a>
+      </form>
+    </div>
+
+<%- include('partials/footer') %>
+</body>
+</html>

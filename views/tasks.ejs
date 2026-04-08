@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="nord">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title><%= title %></title>
+</head>
+<body class="min-h-screen flex flex-col bg-base-200">
+
+  <%- include('partials/header') %>
+
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
+    <div class="container mx-auto pt-4">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-primary">Your Tasks</h1>
+        <a href="/tasks/add" class="btn btn-primary">Add New Task</a>
+      </div>
+
+      <% if (!tasks || tasks.length === 0) { %>
+        <div class="bg-cyan-50 border border-cyan-200 rounded-lg p-4 mb-6 text-cyan-800">
+          No tasks yet. Add a new one!
+        </div>
+      <% } else { %>
+        <div class="grid gap-4">
+          <% tasks.forEach(task => { %>
+            <div class="card bg-base-100 shadow-md p-6 flex flex-col">
+              <div class="flex justify-between items-center">
+                <h2 class="text-xl font-semibold"><%= task.title %></h2>
+                <div class="flex items-center gap-2">
+                  <% if (task.status === 'pending') { %>
+                    <span class="badge badge-warning"><%= task.status %></span>
+                  <% } else { %>
+                    <span class="badge badge-success"><%= task.status %></span>
+                  <% } %>
+                </div>
+              </div>
+              <p class="mt-2 mb-2"><%= task.description || 'No description' %></p>
+              <% if (task.dueDate) { %>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-base-content">
+                    Due: <%= new Date(task.dueDate).toLocaleDateString() %>
+                  </span>
+                </div>
+              <% } %>
+              <div class="mt-4 flex gap-2">
+                <a href="/tasks/edit/<%= task.id %>" class="btn btn-info btn-sm">Edit</a>
+                <form method="POST" action="/tasks/delete/<%= task.id %>" style="display: inline">
+                  <button type="submit" onclick="return confirm('Confirm to delete this task?')" class="btn btn-error btn-sm">Delete</button>
+                </form>
+                <form method="POST" action="/tasks/status/<%= task.id %>" style="display: inline">
+                  <button type="submit" class="btn btn-success btn-sm">
+                    Mark as <%= task.status === 'pending' ? 'Completed' : 'Pending' %>
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+
+      <div class="mt-8">
+        <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+        <a href="/logout" class="btn btn-warning ml-2">Logout</a>
+      </div>
+    </div>
+  </main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

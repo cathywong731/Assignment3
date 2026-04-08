@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="nord">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title><%= title %></title>
+</head>
+<body class="min-h-screen flex flex-col bg-base-200">
+<%- include('partials/header') %>
+
+  <main class="flex-1 flex items-center justify-center p-4 pt-6 pb-10">
+    <div class="w-full max-w-md bg-base-100 rounded-box shadow-xl p-6">
+
+      <h2 class="text-2xl font-bold text-[#14171a] mb-3">Dashboard</h2>
+
+      <div class="card bg-base-100 w-full max-w-xl mt-20 p-10 shadow-lg">
+        <h2 class="card-title text-primary mb-4">
+          Welcome, <%= user.username %>!
+        </h2>
+        <p>Email: <%= user.email %></p>
+        <div class="flex gap-4 mt-8">
+          <a href="/tasks" class="btn btn-secondary">View Tasks</a>
+          <a href="/logout" class="btn btn-warning">Logout</a>
+        </div>
+      </div>
+    </div>
+  
+  
+  </main>
+
+<%- include('partials/footer') %>
+</body>
+</html>

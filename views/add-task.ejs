@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="nord">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/main.css">
+  <title><%= title %></title>
+</head>
+<body class="min-h-screen flex flex-col bg-base-200">
+
+<%- include('partials/header') %>
+
+  <main class="flex-1 flex items-center justify-center p-4 pt-6 pb-10">
+
+    <div class="w-full max-w-md bg-base-100 rounded-box shadow-xl p-8">
+
+      <h2 class="card-title text-primary mb-6">Add Task</h2>
+
+      <% if (error) { %>
+        <div class="alert alert-error mb-4 shadow-sm">
+          <span><%= error %></span>
+        </div>
+      <% } %>
+
+      <form method="POST" action="/tasks/add" class="space-y-4">
+        <input name="title" type="text" placeholder="Title"
+          class="input input-bordered w-full"
+          value="<%= typeof formData !== 'undefined' && formData ? formData.title : '' %>"
+          required>
+
+        <textarea name="description" placeholder="Description"
+          class="textarea textarea-bordered w-full h-28"><%= typeof formData !== 'undefined' && formData ? formData.description : '' %></textarea>
+
+        <input name="dueDate" type="date" class="input input-bordered w-full"
+          value="<%= typeof formData !== 'undefined' && formData && formData.dueDate
+            ? new Date(formData.dueDate).toISOString().split('T')[0] : '' %>">
+
+        <button class="btn btn-primary w-full" type="submit">>Save Changes</button>
+        <a href="/tasks" class="link link-primary block text-center">Back to Tasks</a>
+      </form>
+    </div>
+  </main>
+
+<%- include('partials/footer') %>
+</body>
+</html>
