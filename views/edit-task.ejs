@@ -1,52 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="nord">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/main.css">
-  <title>
-    <%= title %>
-  </title>
+  <title><%= title %></title>
 </head>
-
 <body class="min-h-screen flex flex-col bg-base-200">
 
-  <%- include('partials/header') %>
-    <main class="flex-1 flex items-center justify-center p-4 pt-6 pb-10">
-      <div class="w-full max-w-md bg-base-100 rounded-box shadow-xl p-6">
+<%- include('partials/header') %>
 
-        <% if (error) { %>
-          <div class="alert alert-error mb-4 shadow-sm">
-            <span>
-              <%= error %>
-            </span>
-          </div>
-          <% } %>
-            <form method="POST" action="/tasks/add" class="space-y-4">
-              <h2 class="card-title text-primary">Add Task</h2><br>
-              <input name="title" type="text" placeholder="Title" class="input input-bordered w-full"
-                value="<%= task.title %>" required="">
-              <br><br>
-              <textarea name="description" placeholder="Description" class="textarea textarea-bordered w-full"
-                value="<%= task.description || ' ' %>">
-              </textarea>
-              <br><br>
-              <input name="dueDate" type="date" class="input input-bordered w-full" 
-                value="<%= typeof formData !== 'undefined' && formData && formData.dueDate ? new Date(formData.dueDate).toISOString().split('T')[0] : '' %>">
-              <br><br>
-              <select name="status" class="select select-bordered w-full">
-                <option value="pending" <%=task.status==='pending' ? 'selected' : '' %>>Pending</option>
-                <option value="completed" <%=task.status==='completed' ? 'selected' : '' %>>Completed</option>
-              </select>
-              <br><br>
-              <button class="btn btn-primary w-full" type="submit">Create Task</button>
-              <a href="/tasks" class="link link-primary">Back to Tasks</a>
-            </form>
-      </div>
-    </main>
+  <main class="flex-1 flex items-center justify-center p-4 pt-6 pb-10">
+    <div class="w-full max-w-md bg-base-100 rounded-box shadow-xl p-8">
 
-    <%- include('partials/footer') %>
+
+      <h2 class="card-title text-primary mb-6">Edit Task</h2>
+
+      <% if (error) { %>
+        <div class="alert alert-error mb-4 shadow-sm">
+          <span><%= error %></span>
+        </div>
+      <% } %>
+
+      <form method="POST" action="/tasks/edit/<%= task.id %>" class="space-y-4">
+
+        <input name="title" type="text" placeholder="Title"
+          class="input input-bordered w-full"
+          value="<%= task.title %>"
+          required>
+
+        <textarea name="description" placeholder="Description"
+          class="textarea textarea-bordered w-full h-28"><%= task.description || '' %></textarea>
+
+        <input name="dueDate" type="date" class="input input-bordered w-full"
+          value="<%= task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '' %>">
+
+        <select name="status" class="select select-bordered w-full">
+          <option value="pending"   <%= task.status === 'pending'   ? 'selected' : '' %>>Pending</option>
+          <option value="completed" <%= task.status === 'completed' ? 'selected' : '' %>>Completed</option>
+        </select>
+
+        <button class="btn btn-primary w-full" type="submit">Update Task</button>
+        <a href="/tasks" class="link link-primary block text-center">Back to Tasks</a>
+      </form>
+    </div>
+  </main>
+
+<%- include('partials/footer') %>
 </body>
-
 </html>
