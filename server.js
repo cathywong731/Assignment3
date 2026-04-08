@@ -348,7 +348,7 @@ app.post("/tasks/status/:id", requireLogin, (req, res) => {
 
 // 404 Handler
 app.use((req, res) => {
-  res.status(404).render("error", { message: "Page not found", title: "404" });
+  res.status(404).render("404", { message: "Page not found", title: "404" });
 });
 
 function startAppServer() {
