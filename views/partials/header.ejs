@@ -1,15 +1,13 @@
 
-    <header class="bg-[#1da1f2] text-white py-3">
+    <header class="bg-[#1475aa] text-white py-3">
       <div class="max-w-[1200px] mx-auto px-4 flex justify-between items-center">
         <h1 class="text-xl font-semibold">Assignment 3</h1>
 
         <nav class="text-center md:text-left space-x-0 md:space-x-5">
           <% if (user) { %>
-            <a class="text-white hover:underline block md:inline" href="/">Home</a>
             <a class="text-white hover:underline block md:inline" href="/dashboard">Dashboard</a>
             <a class="text-white hover:underline block md:inline" href="/logout">Logout</a>
           <% } else { %>
-            <a class="text-white hover:underline block md:inline" href="/">Home</a>
             <a class="text-white hover:underline block md:inline" href="/login">Login</a>
             <a class="text-white hover:underline block md:inline" href="/register">Register</a>
           <% } %>
