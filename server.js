@@ -265,7 +265,7 @@ app.post("/tasks/add", requireLogin, (req, res) => {
     userId: req.session.user.id
   })
   .then(() => {
-    res.redirect("/dashboard");
+    res.redirect("/tasks");
   })
   .catch((err) => {
     console.error("Create task error:", err);
@@ -326,7 +326,7 @@ app.post("/tasks/delete/:id", requireLogin, (req, res) => {
     if (!deleted) {
       return res.status(404).send("Task not found");
     }
-    res.redirect("/dashboard");
+    res.redirect("/tasks");
   })
   .catch((err) => {
     console.error("Delete error:", err);
