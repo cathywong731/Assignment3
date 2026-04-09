@@ -1,3 +1,14 @@
+/********************************************************************************
+* WEB322 – Assignment 03
+*
+* I declare that this assignment is my own work in accordance with Seneca's
+* Academic Integrity Policy:
+*
+* https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+*
+* Name: ____SIN WONG_______ Student ID: __177194230______ Date: __8 Apr 2026____
+*
+********************************************************************************/
 require("dotenv").config();
 require('pg'); // explicitly require the "pg" module (for Vercel) 
 const clientSessions = require("client-sessions");
