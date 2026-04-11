@@ -32,16 +32,5 @@ function connectPostgres() {
     .catch((err) => console.log(err));
 }
 
-// module.exports.connectPostgres = async function connectPostgres() {
-//   try {
-//     await sequelize.authenticate();
-//     console.log("PostgreSQL Connected");
-//     await sequelize.sync({ alter: true });   
-//     console.log("PostgreSQL Tables Synced");
-//   } catch (err) {
-//     console.error("PostgreSQL Error:", err);
-//     throw err;
-//   }
-// }
 
  module.exports = { connectMongoDB, connectPostgres, sequelize } ;
